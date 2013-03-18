@@ -12,7 +12,8 @@ docstation.config ($routeProvider) ->
 
 
 docstation.factory "Document", ($resource) ->
-  $resource "/documents"
+  $resource "/documents/:id", {},
+    update: method: "PUT", params: id: "@_id"
 
 
 docstation.controller "DocumentsCtrl", ($scope, Document) ->
@@ -22,20 +23,11 @@ docstation.controller "DocumentsCtrl", ($scope, Document) ->
     $scope.document = new Document
       date: new Date
       iterations: [files: []]
+      editable: true
 
-  $scope.addIteration = (document) ->
-    document.iterations.push files: []
-
-  $scope.addFile = (iteration, file, location) ->
-    iteration.files.push
-      name: file.name
-      link: location
-      description: file.name
-
-  $scope.saveDocument = (document) ->
-    document.$save (document) ->
-      $scope.documents.push document
-      initNewDocument()
+  $scope.newDocument = (document) ->
+    $scope.documents.push document
+    initNewDocument()
 
 
 docstation.filter "filetype", ->
@@ -61,8 +53,27 @@ docstation.filter "filetype", ->
 
 
 docstation.directive "document", ->
-  scope: document: "="
+  scope: document: "=", onsave: "&"
   templateUrl: "/views/document.html"
+  link: (scope, element, attrs) ->
+    scope.addIteration = (document) ->
+      document.iterations.push files: []
+
+    scope.addFile = (iteration, file, location) ->
+      iteration.files.push
+        name: file.name
+        link: location
+        description: file.name
+
+    scope.saveDocument = (document) ->
+      callback = (document) ->
+        scope.document = document
+        scope.$eval "onsave({document: document})"
+
+      if document._id
+        document.$update callback
+      else
+        document.$save callback
 
 
 docstation.directive "datepicker", (dateFilter) ->

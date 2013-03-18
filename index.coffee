@@ -43,6 +43,7 @@ loader.use (container, callback) ->
 
   app.get "/documents", crud.list(Document).make()
   app.post "/documents", crud.post(Document).make()
+  app.put "/documents/:id", crud.put(Document).make()
 
   callback()
 

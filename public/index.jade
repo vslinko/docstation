@@ -27,21 +27,4 @@ html(lang="ru", ng-app="docstation")
 
     h2 Новый документ
 
-    .well
-      input.input-block-level(type="text", placeholder="Название документа", ng-model="document.name")
-      input.datepicker(type="text", placeholder="Дата", datepicker="document.date")
-      div(ng-repeat="iteration in document.iterations")
-        p Итерация №{{ $index + 1 }}
-        ul.thumbnails
-          li.span3(ng-repeat="file in iteration.files")
-            a.thumbnail
-              img(ng-src="/images/icons/{{ file.name | filetype }}.png")
-              br
-              input(ng-model="file.description")
-          li.span3
-            a.thumbnail(fileupload="addFile(iteration, file, location)")
-              img(ng-src="/images/icons/fileicon_bg.png")
-              br
-              span Загрузить файл
-      button.btn(ng-click="addIteration(document)") Добавить итерацию
-      button.btn(ng-click="saveDocument(document)") Сохранить документ
+    .well(document="document", onsave="newDocument(document)")
