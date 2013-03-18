@@ -1,0 +1,6 @@
+*.js
+*.css
+/node_modules
+/.components
+/npm-debug.log
+/public/components

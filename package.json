@@ -1,0 +1,11 @@
+{
+  "name": "docstation",
+  "version": "0.0.0",
+  "scripts": {
+    "start": "./node_modules/.bin/coffee index.coffee"
+  },
+  "dependencies": {
+    "coffee-script": "~1.6",
+    "symfio": "~0.4"
+  }
+}

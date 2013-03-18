@@ -1,0 +1,15 @@
+doctype 5
+html(lang="ru", ng-app="docstation")
+  head
+    title Docstation
+
+    link(rel="stylesheet", href="/components/bootstrap/docs/assets/css/bootstrap.css")
+    link(rel="stylesheet", href="/styles/index.css")
+
+    script(src="/components/angular/angular.min.js")
+    script(src="/scripts/index.js")
+
+  body.container(ng-controller="DocumentsCtrl")
+    h1 Документы
+
+    div.well(ng-repeat="document in documents", document="document")
