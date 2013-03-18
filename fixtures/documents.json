@@ -1,0 +1,28 @@
+[
+  {"name": "Договор АА1/13", "date": "1991-01-19", "iterations": [
+    {"files": [
+      {"type": "pages", "link": "#!/", "description": "Оригинал"},
+      {"type": "pdf", "link": "#!/", "description": "Релиз"},
+      {"type": "word", "link": "#!/", "description": "DOC"},
+      {"type": "image", "link": "#!/", "description": "Скан, страница 1"},
+      {"type": "image", "link": "#!/", "description": "Скан, страница 2"},
+      {"type": "image", "link": "#!/", "description": "Скан, страница 3"},
+      {"type": "image", "link": "#!/", "description": "Скан, страница 4"}
+    ]},
+    {"files": [
+      {"type": "pages", "link": "#!/", "description": "Оригинал"},
+      {"type": "pdf", "link": "#!/", "description": "Релиз"},
+      {"type": "word", "link": "#!/", "description": "DOC"},
+      {"type": "image", "link": "#!/", "description": "Скан, страница 1"},
+      {"type": "image", "link": "#!/", "description": "Скан, страница 2"},
+      {"type": "image", "link": "#!/", "description": "Скан, страница 3"},
+      {"type": "image", "link": "#!/", "description": "Скан, страница 4"}
+    ]}
+  ]},
+  {"name": "Договор ББ1/13", "date": "1989-10-07", "iterations": [
+    {"files": [
+      {"type": "pages", "link": "#!/", "description": "Оригинал"},
+      {"type": "compressed", "link": "#!/", "description": "Архив"}
+    ]}
+  ]}
+]

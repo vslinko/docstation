@@ -7,9 +7,10 @@ html(lang="ru", ng-app="docstation")
     link(rel="stylesheet", href="/styles/index.css")
 
     script(src="/components/angular/angular.min.js")
+    script(src="/components/angular-resource/angular-resource.min.js")
     script(src="/scripts/index.js")
 
   body.container(ng-controller="DocumentsCtrl")
     h1 Документы
 
-    div.well(ng-repeat="document in documents", document="document")
+    div.well(ng-repeat="document in documents | orderBy:'-date'", document="document")
