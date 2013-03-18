@@ -3,11 +3,8 @@ p от {{ document.date | date:"dd.MM.yyyy" }} г.
 div(ng-repeat="iteration in document.iterations")
   h3 Итерация №{{ $index + 1 }}
   ul.thumbnails()
-    li.span2(ng-repeat="file in iteration.files")
-      a.thumbnail(href="{{ file.link }}")
-        ng-switch(on="!!file.type")
-          img(ng-switch-when="true", ng-src="/images/icons/{{ file.type }}.png")
-          img(ng-switch-when="false", src="/images/icons/fileicon_bg.png")
-
+    li.span3(ng-repeat="file in iteration.files")
+      a.thumbnail(href="{{ file.link }}", target="_blank")
+        img(ng-src="/images/icons/{{ file.name | filetype }}.png")
         br
         span {{ file.description }}

@@ -7,13 +7,18 @@ container.set "components", [
   "angular#~1.0"
   "angular-resource#~1.0"
   "bootstrap#~2.3"
+  "jquery-ui#~1.10"
+  "bootstrap-datepicker#~1.0"
+  "jquery-file-upload#~7.2"
 ]
 
 loader.use symfio.plugins.express
+loader.use symfio.plugins.expressLogger
 loader.use symfio.plugins.assets
 loader.use symfio.plugins.bower
 loader.use symfio.plugins.mongoose
 loader.use symfio.plugins.crud
+loader.use symfio.plugins.uploads
 
 loader.use (container, callback) ->
   connection = container.get "connection"
@@ -22,7 +27,7 @@ loader.use (container, callback) ->
   app = container.get "app"
 
   FileSchema = new mongoose.Schema
-    type: type: String
+    name: type: String, required: true
     link: type: String, required: true
     description: type: String, required: true
 
@@ -37,9 +42,8 @@ loader.use (container, callback) ->
   Document = connection.model "documents", DocumentSchema
 
   app.get "/documents", crud.list(Document).make()
+  app.post "/documents", crud.post(Document).make()
 
   callback()
-
-loader.use symfio.plugins.fixtures
 
 loader.load() if require.main is module

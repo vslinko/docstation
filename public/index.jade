@@ -4,8 +4,15 @@ html(lang="ru", ng-app="docstation")
     title Docstation
 
     link(rel="stylesheet", href="/components/bootstrap/docs/assets/css/bootstrap.css")
+    link(rel="stylesheet", href="/components/bootstrap-datepicker/css/datepicker.css")
     link(rel="stylesheet", href="/styles/index.css")
 
+    script(src="/components/jquery/jquery.min.js")
+    script(src="/components/bootstrap-datepicker/js/bootstrap-datepicker.js")
+    script(src="/components/bootstrap-datepicker/js/locales/bootstrap-datepicker.ru.js")
+    script(src="/components/jquery-ui/ui/jquery.ui.widget.js")
+    script(src="/components/jquery-file-upload/js/jquery.iframe-transport.js")
+    script(src="/components/jquery-file-upload/js/jquery.fileupload.js")
     script(src="/components/angular/angular.min.js")
     script(src="/components/angular-resource/angular-resource.min.js")
     script(src="/scripts/index.js")
@@ -14,6 +21,27 @@ html(lang="ru", ng-app="docstation")
     h1 Документы
 
     .well
-      input.input-block-level(ng-model="search.name")
+      input.input-block-level(placeholder="Поиск", ng-model="search.name")
 
     div.well(ng-repeat="document in documents | filter:search | orderBy:'-date'", document="document")
+
+    h2 Новый документ
+
+    .well
+      input.input-block-level(type="text", placeholder="Название документа", ng-model="document.name")
+      input.datepicker(type="text", placeholder="Дата", datepicker="document.date")
+      div(ng-repeat="iteration in document.iterations")
+        p Итерация №{{ $index + 1 }}
+        ul.thumbnails
+          li.span3(ng-repeat="file in iteration.files")
+            a.thumbnail
+              img(ng-src="/images/icons/{{ file.name | filetype }}.png")
+              br
+              input(ng-model="file.description")
+          li.span3
+            a.thumbnail(fileupload="addFile(iteration, file, location)")
+              img(ng-src="/images/icons/fileicon_bg.png")
+              br
+              span Загрузить файл
+      button.btn(ng-click="addIteration(document)") Добавить итерацию
+      button.btn(ng-click="saveDocument(document)") Сохранить документ
