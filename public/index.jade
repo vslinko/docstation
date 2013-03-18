@@ -13,4 +13,7 @@ html(lang="ru", ng-app="docstation")
   body.container(ng-controller="DocumentsCtrl")
     h1 Документы
 
-    div.well(ng-repeat="document in documents | orderBy:'-date'", document="document")
+    .well
+      input.input-block-level(ng-model="search.name")
+
+    div.well(ng-repeat="document in documents | filter:search | orderBy:'-date'", document="document")
